@@ -2,9 +2,9 @@
 
 This template randomly pairs adjectives and verbs from arrays to create random names such as:
 
-    - cyan-dragon
-    - gold-hamster
-    - and more (400 combinations by default)
+- cyan-dragon
+- gold-hamster
+- and more (400 combinations by default)
 
 It is performed completely using native ARM template functions. and takes around 30 seconds to deploy.
 
