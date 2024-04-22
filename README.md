@@ -20,7 +20,7 @@ Include the following linked template resource in your template:
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri":"https://raw.githubusercontent.com/lrakai/random-name-picker-arm-template/main/azure-deploy.json",
+          "uri":"https://raw.githubusercontent.com/cloudacademy/random-name-picker-arm-template/main/azure-deploy.json",
           "contentVersion":"1.0.0.0"
         }
       }
