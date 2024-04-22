@@ -1,0 +1,116 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "adjectives": {
+            "type": "array",
+            "defaultValue": [
+                "red",
+                "green",
+                "blue",
+                "yellow",
+                "orange",
+                "purple",
+                "black",
+                "white",
+                "gray",
+                "brown",
+                "pink",
+                "cyan",
+                "magenta",
+                "lime",
+                "teal",
+                "indigo",
+                "violet",
+                "fuchsia",
+                "gold",
+                "silver"
+            ]
+        },
+        "nouns": {
+            "type": "array",
+            "defaultValue": [
+                "dog",
+                "cat",
+                "bird",
+                "fish",
+                "rabbit",
+                "hamster",
+                "turtle",
+                "snake",
+                "lizard",
+                "frog",
+                "toad",
+                "newt",
+                "salamander",
+                "iguana",
+                "gecko",
+                "chameleon",
+                "crocodile",
+                "alligator",
+                "dinosaur",
+                "dragon"
+            ]
+        },
+        "guid1": {
+            "type": "string",
+            "defaultValue": "[newGuid()]"
+        },
+        "guid2": {
+            "type": "string",
+            "defaultValue": "[newGuid()]"
+        }
+    },
+    "variables": {
+        "randomString1": "[concat(substring(parameters('guid1'),0,8),'1')]",
+        "randomString2": "[concat(substring(parameters('guid2'),0,8),'1')]",
+        "digits": [ "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" ],
+        "copy": [
+            {
+                "name": "randomChars1",
+                "count": "[length(variables('randomString1'))]",
+                "input": "[substring(variables('randomString1'), copyIndex('randomChars1'), 1)]"
+            },
+            {
+                "name": "randomChars2",
+                "count": "[length(variables('randomString2'))]",
+                "input": "[substring(variables('randomString2'), copyIndex('randomChars2'), 1)]"
+            }
+        ],
+        "intersection1": "[intersection(variables('randomChars1'), variables('digits'))]",
+        "intersection2": "[intersection(variables('randomChars2'), variables('digits'))]",
+        "first1": "[first(variables('intersection1'))]",
+        "first2": "[first(variables('intersection2'))]",
+        "first1mod2": "[string(mod(int(variables('first1')), 2))]",
+        "first2mod2": "[string(mod(int(variables('first2')), 2))]",
+        "index1": "[int(concat(variables('first1mod2'),variables('first2')))]",
+        "index2": "[int(concat(variables('first2mod2'),variables('first1')))]",
+        "adjective": "[parameters('adjectives')[variables('index1')]]",
+        "noun": "[parameters('nouns')[variables('index2')]]",
+        "randomName": "[concat(variables('adjective'), '-', variables('noun'))]"
+    },
+    "resources": [
+    ],
+    "outputs": {
+        "randomName": {
+            "type": "string",
+            "value": "[variables('randomName')]"
+        },
+        "index1": {
+            "type": "int",
+            "value": "[variables('index1')]"
+        },
+        "index2": {
+            "type": "int",
+            "value": "[variables('index2')]"
+        },
+        "adjective": {
+            "type": "string",
+            "value": "[variables('adjective')]"
+        },
+        "noun": {
+            "type": "string",
+            "value": "[variables('noun')]"
+        }
+    }
+}
